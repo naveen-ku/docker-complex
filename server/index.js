@@ -24,18 +24,6 @@ const pgClient = new Pool ({
 pgClient.on('error', () => console.log('Lost PG connection'));
 
 
-// const pgClient = new Client ({
-// 	host: keys.pgHost,
-// 	user: keys.pgUser,
-// 	database: keys.pgDatabase,
-// 	password: keys.pgPassword,
-// 	port: keys.pgPort
-// });
-
-// pgClient.connect()
-//   .then(() => console.log('Postgress connected'))
-//   .catch(err => console.error('Postgress connection error', err.stack))
-
 // Postgress Create table
 pgClient
 	.query('CREATE TABLE IF NOT EXISTS values (number INT)')
@@ -60,13 +48,13 @@ app.get('/',(req,res) => {
 
 app.get('/values/all', async (req,res) => {
 	const values = await pgClient.query('SELECT * FROM values');
-	console.log('All values: ', values);
+	console.log('All values (Postgress): ', values);
 	res.send(values.rows);
 });
 
 app.get('/values/current', async (req,res) => {
 	redisClient.hgetall('values',(err, values) => {
-		console.log('Current values: ', values);
+		console.log('Current values (Redis): ', values);
 		res.send(values);
 	})
 });

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class Fib extends Component {
   state = {
-    seenIndexes: {},
+    seenIndexes: [],
     values: {},
     index: ''
   };
@@ -25,7 +25,7 @@ class Fib extends Component {
     });
   }
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
 
     await axios.post('/api/values', {
@@ -44,7 +44,7 @@ class Fib extends Component {
     for (let key in this.state.values) {
       entries.push(
         <div key={key}>
-          For index {key} I calculated {this.state.values[key]}
+          For index {key} , the calculated value is {this.state.values[key]}
         </div>
       );
     }

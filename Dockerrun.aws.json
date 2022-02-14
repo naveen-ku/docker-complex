@@ -1,0 +1,41 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [
+		{
+			"name":"awsclient",
+			"image":"naveenku/multi-client",
+			"hostname": "client",
+			"essential":false,
+			"memory":128
+		},
+
+		{
+			"name":"awsserver",
+			"image":"naveenku/multi-server",
+			"hostname": "serverapi",
+			"essential":false,
+			"memory":128
+		},
+		{
+			"name":"awsworker",
+			"image":"naveenku/multi-worker",
+			"hostname": "worker",
+			"essential":false,
+			"memory":128
+		},
+		{
+			"name":"awsnginx",
+			"image":"naveenku/multi-nginx",
+			"hostname": "nginx",
+			"essential":true,
+			"portMappings":[
+				{
+					"hostPort": 80,
+					"containerPort":80
+				}
+			],
+			"links":["awsclient","awsserver"],
+			"memory":128
+		}
+	]
+}

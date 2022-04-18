@@ -11,8 +11,8 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <h1 className="App-title">Welcome to the Fib Calculator</h1>
-            <Link to="/">Home </Link>
-            <Link to="/otherpage"> Other Page</Link>
+            <Link to="/" className='nav-links'>Home </Link>
+            <Link to="/otherpage" className='nav-links'> Other Page</Link>
           </header>
           <br />
           <br />
